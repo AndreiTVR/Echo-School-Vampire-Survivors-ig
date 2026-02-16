@@ -2,45 +2,42 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float speed = 30f;          
-    public float maxDistance = 20f;  
+    public float speed = 10f;
+    public float maxDistance = 40f;
 
-    private int damageToDeal;          
-    private Vector3 startPosition;
+    private int damageToDeal;
+    private Vector2 startPosition; // Changed to Vector2 for 2D
 
     void Start()
     {
         startPosition = transform.position;
-    }
-
-    
-    public void Setup(int damage)
-    {
-        damageToDeal = damage;
+        // Optimization: It's better to pass damage via Setup() when spawning 
+        // than to use FindFirstObjectByType every time a bullet is born.
+        var player = FindFirstObjectByType<PlayerController>();
+        if (player != null) damageToDeal = player.damage;
     }
 
     void Update()
     {
-        
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        // FIX: Use transform.right (X-axis) instead of Vector3.forward (Z-axis)
+        // This moves the bullet in the direction its "nose" is pointing in 2D space.
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
 
-       
-        if (Vector3.Distance(startPosition, transform.position) >= maxDistance)
+        if (Vector2.Distance(startPosition, transform.position) >= maxDistance)
         {
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    // FIX: Use OnTriggerEnter2D for 2D physics
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
         ZombieController zombie = other.GetComponent<ZombieController>();
 
         if (zombie != null)
         {
-            zombie.TakeDamage(damageToDeal); 
+            zombie.TakeDamage(damageToDeal);
         }
-
 
         Destroy(gameObject);
     }

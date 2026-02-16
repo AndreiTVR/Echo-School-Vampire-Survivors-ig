@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int maxHealth = 100;
 
     [Header("Shooting Settings")]
-    public GameObject projectilePrefab; 
+    public GameObject projectilePrefab;
+    public int damage = 10;
     public Transform firePoint;        
     public float fireRate = 0.5f;    
 
