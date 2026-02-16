@@ -4,27 +4,35 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
+    private Rigidbody2D rb;
+    private Vector2 moveInput;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
-        float moveX = 0;
-        float moveY = 0; // Changed from moveZ to moveY
-
+        // Get input in Update
+        float x = 0;
+        float y = 0;
         var keyboard = Keyboard.current;
 
         if (keyboard != null)
         {
-            // Left/Right = X
-            if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) moveX = -1f;
-            if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) moveX = 1f;
-
-            // Up/Down = Y (This was your moveZ)
-            if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) moveY = 1f;
-            if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) moveY = -1f;
+            if (keyboard.aKey.isPressed) x = -1f;
+            if (keyboard.dKey.isPressed) x = 1f;
+            if (keyboard.wKey.isPressed) y = 1f;
+            if (keyboard.sKey.isPressed) y = -1f;
         }
 
-        // Apply to X and Y, keep Z at 0
-        Vector3 movement = new Vector3(moveX, moveY, 0).normalized;
-        transform.Translate(movement * speed * Time.deltaTime);
+        moveInput = new Vector2(x, y).normalized;
+    }
+
+    void FixedUpdate()
+    {
+        // Move the physical body in FixedUpdate for smooth collisions
+        rb.linearVelocity = moveInput * speed;
     }
 }
