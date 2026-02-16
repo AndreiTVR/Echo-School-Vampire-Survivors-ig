@@ -1,16 +1,30 @@
 using UnityEngine;
+using UnityEngine.AI; // OBLIGATORIU pentru NavMeshAgent
 
-public class ZombieMovement : MonoBehaviour
+public class ZombieAI : MonoBehaviour
 {
+    [Header("Referinte")]
     public Transform player;
-    public float speed = 2f;
-    public float range = 10f;
-    public float stopDist = 1.1f;
+    private NavMeshAgent agent;
 
-    [Header("Attack Settings")]
+    [Header("Setari Navigatie")]
+    public float range = 10f;
+    public float stopDist = 1.1f; 
+
+    [Header("Setari Atac")]
     public int attackDamage = 10;
-    public float attackRate = 1.5f; // Seconds between attacks
+    public float attackRate = 1.5f;
     private float nextAttackTime = 0f;
+
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
+        agent.stoppingDistance = stopDist;
+    }
 
     void Update()
     {
@@ -18,29 +32,45 @@ public class ZombieMovement : MonoBehaviour
 
         float dist = Vector2.Distance(transform.position, player.position);
 
-        // 1. Movement Logic
-        if (dist < range && dist > stopDist)
+        
+        if (dist < range)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+        }
+        else
+        {
+            
+            agent.isStopped = true;
         }
 
-        // 2. Attack Logic
-        if (dist <= stopDist && Time.time >= nextAttackTime)
+        if (dist <= stopDist + 0.2f && Time.time >= nextAttackTime)
         {
             Attack();
             nextAttackTime = Time.time + attackRate;
         }
+
+        RotateSprite();
     }
 
     void Attack()
     {
-        // Try to get the PlayerController script from the player object
         PlayerController playerHealth = player.GetComponent<PlayerController>();
 
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(attackDamage);
-            Debug.Log("Zombie bit the player!");
+            Debug.Log("Zombie a muscat jucatorul!");
         }
+    }
+
+    void RotateSprite()
+    {
+       
+        if (agent.velocity.x > 0.1f)
+            transform.localScale = new Vector3(1, 1, 1);
+        else if (agent.velocity.x < -0.1f)
+            transform.localScale = new Vector3(-1, 1, 1);
     }
 }
