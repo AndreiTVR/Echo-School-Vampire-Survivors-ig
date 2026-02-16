@@ -5,7 +5,7 @@ public class BulletController : MonoBehaviour
     public float speed = 10f;
     public float maxDistance = 40f;
 
-    private int damageToDeal;
+    public int damageToDeal;
     private Vector2 startPosition; // Changed to Vector2 for 2D
 
     void Start()
