@@ -23,7 +23,7 @@ public class ZombieController : MonoBehaviour
 
         for (int i =0; i < nectarDropAmount; i++)
         {
-            Instantiate(nectarPrefab);
+            Instantiate(nectarPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
 
         }

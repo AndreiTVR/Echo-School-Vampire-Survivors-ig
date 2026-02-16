@@ -111,7 +111,7 @@ MonoBehaviour:
   damage: 10
   attackSpeed: 1
   nectarDropAmount: 2
-  nectarPrefab: {fileID: 0}
+  nectarPrefab: {fileID: 4683970933173228103, guid: 8e8149f737c2f614dbbab4f9c81c221d, type: 3}
 --- !u!50 &4039071849936294679
 Rigidbody2D:
   serializedVersion: 5
