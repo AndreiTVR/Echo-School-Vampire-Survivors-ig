@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,16 +24,17 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= nextFireTime)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && Time.time >= nextFireTime)
         {
             Shoot();
             nextFireTime = Time.time + fireRate;
         }
-    }
-
+    } 
     void Shoot()
     {
         Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         Debug.Log("Shot fired!");
     }
 }
+
+   
