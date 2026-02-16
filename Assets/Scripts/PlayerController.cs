@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public int health = 100;
+    public int nectarCollected = 0;
     [SerializeField] int maxHealth = 100;
 
     [Header("Shooting Settings")]

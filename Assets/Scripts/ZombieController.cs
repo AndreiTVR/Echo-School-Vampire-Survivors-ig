@@ -6,7 +6,7 @@ public class ZombieController : MonoBehaviour
     public int damage = 10;
     public float attackSpeed = 1.0f;
     public int nectarDropAmount = 2;
-
+    public GameObject nectarPrefab;
     public void TakeDamage(int amount)
     {
         health -= amount;
@@ -21,7 +21,11 @@ public class ZombieController : MonoBehaviour
     {
         Debug.Log("Zombie mort! Ai primit: " + nectarDropAmount + " nectar");
 
-        
-        Destroy(gameObject);
+        for (int i =0; i < nectarDropAmount; i++)
+        {
+            Instantiate(nectarPrefab);
+            Destroy(gameObject);
+
+        }
     }
 }
