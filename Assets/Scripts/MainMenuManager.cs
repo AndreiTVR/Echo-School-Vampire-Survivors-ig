@@ -10,9 +10,14 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("idk");
     }
 
-    
+    public void Story()
 
-public void Quit()
+    {
+        SceneManager.LoadScene("story");
+    }
+
+
+    public void Quit()
 
     {
 
