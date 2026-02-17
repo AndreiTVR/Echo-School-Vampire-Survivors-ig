@@ -3927,7 +3927,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 469412641}
   dialogueText: {fileID: 1801772850}
   dialogue:
-  - hi
+  - I'm not feeling well, the infection is spreading. Go look for some nectar.
   wordSpeed: 0.05
   playerIsClose: 0
 --- !u!1 &1526123647
