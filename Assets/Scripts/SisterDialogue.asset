@@ -16,8 +16,8 @@ MonoBehaviour:
   npcPortrait: {fileID: 0}
   dialogueLines:
   - Hi
+  autoProgressLines: 01
+  autoProgressDelay: 1.5
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 
-  autoProgressDelay: 1.5
