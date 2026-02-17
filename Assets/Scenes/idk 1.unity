@@ -3923,12 +3923,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f987d338cfac29743924de567449e436, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPC
+  m_EditorClassIdentifier: Assembly-CSharp::Sister
   dialoguePanel: {fileID: 469412641}
   dialogueText: {fileID: 1801772850}
   dialogue:
-  - I'm not feeling well. Go look for some nectar.
-  wordSpeed: 0
+  - hi
+  wordSpeed: 0.05
   playerIsClose: 0
 --- !u!1 &1526123647
 GameObject:

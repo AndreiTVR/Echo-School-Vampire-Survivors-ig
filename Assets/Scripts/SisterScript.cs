@@ -4,23 +4,29 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem; 
 
-public class NPC : MonoBehaviour
+public class Sister : MonoBehaviour
 {
-    public GameObject dialoguePanel;
-    public TextMeshProUGUI dialogueText;
+    [Header("Configurare UI")]
+    public GameObject dialoguePanel; 
+    public TextMeshProUGUI dialogueText; 
+
+    [Header("Setari Dialog")]
     public string[] dialogue;
     private int index = 0;
+    public float wordSpeed = 0.05f;
 
-    public float wordSpeed;
+    [Header("Detectie Jucator")]
     public bool playerIsClose;
 
     void Start()
     {
         dialogueText.text = "";
+        dialoguePanel.SetActive(false); 
     }
 
     void Update()
     {
+        
         if (Keyboard.current.eKey.wasPressedThisFrame && playerIsClose)
         {
             if (!dialoguePanel.activeInHierarchy)
@@ -34,6 +40,7 @@ public class NPC : MonoBehaviour
             }
         }
 
+        
         if (Keyboard.current.qKey.wasPressedThisFrame && dialoguePanel.activeInHierarchy)
         {
             RemoveText();
@@ -45,7 +52,7 @@ public class NPC : MonoBehaviour
         StopAllCoroutines();
         dialogueText.text = "";
         index = 0;
-        dialoguePanel.SetActive(false);
+        dialoguePanel.SetActive(false); 
     }
 
     IEnumerator Typing()
@@ -85,7 +92,7 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsClose = false;
-            RemoveText();
+            RemoveText(); 
         }
     }
 }
