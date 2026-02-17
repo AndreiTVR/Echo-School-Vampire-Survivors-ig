@@ -5782,6 +5782,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2501749713075703685, guid: c5447bc946315884996fb29e33a2492e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3709b077243eff7468b2322d7eb4b225, type: 2}
     - target: {fileID: 5615292833197884169, guid: c5447bc946315884996fb29e33a2492e, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -5913,10 +5917,18 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 289992566}
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - {fileID: 6134198060111901734}
   - {fileID: 6475995844325426054}
   - {fileID: 905551409}
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   - {fileID: 45299655}
+  - {fileID: 6134198060111901734}
+  - {fileID: 6475995844325426054}
   - {fileID: 575326673}
   - {fileID: 416210931}
   - {fileID: 1870002889}
