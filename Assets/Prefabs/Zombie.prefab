@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4039071849936294679}
   - component: {fileID: 8165877269379348504}
   - component: {fileID: 8485213023222079181}
-  - component: {fileID: 7208005534129378418}
+  - component: {fileID: 4411372151823541920}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -198,12 +198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf2391c3b716bb49a44d1e71b51b1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZombieMovement
-  player: {fileID: 7350591914308856196, guid: c5447bc946315884996fb29e33a2492e, type: 3}
+  player: {fileID: 0}
   range: 10
   stopDist: 1.1
   attackDamage: 10
   attackRate: 1.5
---- !u!195 &7208005534129378418
+--- !u!195 &4411372151823541920
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
