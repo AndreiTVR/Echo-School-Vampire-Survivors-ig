@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem; 
 
 public class NPC : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class NPC : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
+        if (Keyboard.current.eKey.wasPressedThisFrame && playerIsClose)
         {
             if (!dialoguePanel.activeInHierarchy)
             {
@@ -34,7 +34,7 @@ public class NPC : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && dialoguePanel.activeInHierarchy)
+        if (Keyboard.current.qKey.wasPressedThisFrame && dialoguePanel.activeInHierarchy)
         {
             RemoveText();
         }
@@ -42,7 +42,7 @@ public class NPC : MonoBehaviour
 
     public void RemoveText()
     {
-        StopAllCoroutines(); 
+        StopAllCoroutines();
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
@@ -50,7 +50,7 @@ public class NPC : MonoBehaviour
 
     IEnumerator Typing()
     {
-        dialogueText.text = ""; 
+        dialogueText.text = "";
         foreach (char letter in dialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
@@ -63,7 +63,7 @@ public class NPC : MonoBehaviour
         if (index < dialogue.Length - 1)
         {
             index++;
-            StopAllCoroutines(); 
+            dialogueText.text = "";
             StartCoroutine(Typing());
         }
         else
