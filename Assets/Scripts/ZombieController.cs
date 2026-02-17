@@ -7,10 +7,11 @@ public class ZombieController : MonoBehaviour
     public float attackSpeed = 1.0f;
     public int nectarDropAmount = 2;
     public GameObject nectarPrefab;
+    
     public void TakeDamage(int amount)
     {
         health -= amount;
-
+        Debug.Log(health);
         if (health <= 0)
         {
             Die();

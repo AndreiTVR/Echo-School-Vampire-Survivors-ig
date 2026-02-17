@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI; // OBLIGATORIU pentru NavMeshAgent
 
-public class ZombieAI : MonoBehaviour
+public class ZombieMovement : MonoBehaviour
 {
     [Header("Referinte")]
     public Transform player;
@@ -19,36 +19,33 @@ public class ZombieAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
+        player = FindAnyObjectByType<PlayerController>().GetComponent<Transform>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
         agent.stoppingDistance = stopDist;
     }
-
     void Update()
     {
         if (player == null) return;
 
-        float dist = Vector2.Distance(transform.position, player.position);
+        float dist = Vector3.Distance(transform.position, player.position);
 
-        
         if (dist < range)
         {
-            
             agent.isStopped = false;
             agent.SetDestination(player.position);
+
+            // Logic check: Are we close enough AND is the timer ready?
+            // We check Time.time HERE before even calling the function
+            if (dist <= (agent.stoppingDistance + 0.3f) && Time.time >= nextAttackTime)
+            {
+                Attack();
+            }
         }
         else
         {
-            
             agent.isStopped = true;
-        }
-
-        if (dist <= stopDist + 0.2f && Time.time >= nextAttackTime)
-        {
-            Attack();
-            nextAttackTime = Time.time + attackRate;
         }
 
         RotateSprite();
@@ -56,14 +53,19 @@ public class ZombieAI : MonoBehaviour
 
     void Attack()
     {
-        PlayerController playerHealth = player.GetComponent<PlayerController>();
+        // 1. Reset timer IMMEDIATELY
+        nextAttackTime = Time.time + attackRate;
 
+        // 2. Try to damage the player
+        PlayerController playerHealth = player.GetComponent<PlayerController>();
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(attackDamage);
-            Debug.Log("Zombie a muscat jucatorul!");
+            // This will tell us which specific zombie is the killer
+            Debug.Log($"{gameObject.name} bit you! Next attack at: {nextAttackTime}");
         }
     }
+
 
     void RotateSprite()
     {

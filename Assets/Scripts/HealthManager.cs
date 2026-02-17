@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarDisplay : MonoBehaviour
+public class HealthManager : MonoBehaviour
 {
     public Image healthBarFill;   
     public PlayerController player; 
@@ -10,6 +10,7 @@ public class HealthBarDisplay : MonoBehaviour
 
     void Start()
     {
+        player = FindAnyObjectByType<PlayerController>();
         if (player != null)
         {
            

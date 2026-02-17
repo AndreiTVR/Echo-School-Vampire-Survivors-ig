@@ -23,7 +23,10 @@ public class PlayerController : MonoBehaviour
         health -= damage;
         if (health <= 0) SceneManager.LoadScene("Menu");
     }
-
+    private void Start()
+    {
+        health = maxHealth;
+    }
     private void Update()
     {
         // 1. Capture Movement Input for Direction
