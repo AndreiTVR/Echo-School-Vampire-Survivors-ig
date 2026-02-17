@@ -2,26 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-
+using TMPro;
 
 public class NPC : MonoBehaviour
 {
     public GameObject dialoguePanel;
-    public Text dialogueText;
+    public TextMeshProUGUI dialogueText;
     public string[] dialogue;
     private int index = 0;
 
     public float wordSpeed;
     public bool playerIsClose;
 
-
     void Start()
     {
         dialogueText.text = "";
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
@@ -35,8 +32,8 @@ public class NPC : MonoBehaviour
             {
                 NextLine();
             }
-
         }
+
         if (Input.GetKeyDown(KeyCode.Q) && dialoguePanel.activeInHierarchy)
         {
             RemoveText();
@@ -45,6 +42,7 @@ public class NPC : MonoBehaviour
 
     public void RemoveText()
     {
+        StopAllCoroutines(); 
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
@@ -52,6 +50,7 @@ public class NPC : MonoBehaviour
 
     IEnumerator Typing()
     {
+        dialogueText.text = ""; 
         foreach (char letter in dialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
@@ -64,7 +63,7 @@ public class NPC : MonoBehaviour
         if (index < dialogue.Length - 1)
         {
             index++;
-            dialogueText.text = "";
+            StopAllCoroutines(); 
             StartCoroutine(Typing());
         }
         else
@@ -74,19 +73,19 @@ public class NPC : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other)
-
-
     {
-        playerIsClose = true;
+        if (other.CompareTag("Player"))
+        {
+            playerIsClose = true;
+        }
     }
-
 
     private void OnTriggerExit2D(Collider2D other)
-
-
     {
-        playerIsClose = false;
-        RemoveText();
+        if (other.CompareTag("Player"))
+        {
+            playerIsClose = false;
+            RemoveText();
+        }
     }
-
 }
